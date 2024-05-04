@@ -1,7 +1,23 @@
 services:
+  camouflage:
+    image: nginx:1.23
+    restart: always
+    network_mode: host
+
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+
+  ha-proxy:
+    image: haproxy:2.3
+    restart: always
+    network_mode: host
+
+    volumes:
+      - ./ha-proxy:/usr/local/etc/haproxy
+
   marzban-node:
-    # build: .
-    image: gozargah/marzban-node:latest
+    build: .
+    # image: gozargah/marzban-node:latest
     restart: always
     network_mode: host
 
